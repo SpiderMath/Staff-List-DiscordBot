@@ -1,0 +1,29 @@
+{
+	"name": "staff-list-discordbot",
+	"version": "0.0.0",
+	"description": "?",
+	"scripts": {
+		"dev": "npx ts-node-dev ./Source/Bot.ts"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SpiderMath/Staff-List-DiscordBot.git"
+	},
+	"author": "SpiderMath",
+	"license": "AGPL-3.0",
+	"bugs": {
+		"url": "https://github.com/SpiderMath/Staff-List-DiscordBot/issues"
+	},
+	"homepage": "https://github.com/SpiderMath/Staff-List-DiscordBot#readme",
+	"devDependencies": {
+		"@types/node": "^16.4.13",
+		"@typescript-eslint/parser": "^4.29.1",
+		"eslint": "^7.32.0",
+		"ts-node-dev": "^1.1.8",
+		"typescript": "^4.3.5"
+	},
+	"dependencies": {
+		"discord.js": "^13.0.1",
+		"dotenv": "^10.0.0"
+	}
+}
