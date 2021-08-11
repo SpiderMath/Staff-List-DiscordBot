@@ -17,6 +17,7 @@ export default class InteractionCreateEvent extends BaseEvent {
 		// Here I am gonna deal with the command interaction.
 
 		const commandName = interaction.commandName;
+		if(!this.client.owners.includes(interaction.user.id)) return;
 
 		const command = this.client.commands.get(commandName);
 

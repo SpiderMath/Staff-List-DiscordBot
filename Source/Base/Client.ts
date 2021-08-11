@@ -1,14 +1,24 @@
 import { Client, Intents, Collection } from "discord.js";
-import { readdir } from "fs/promises";
+import { readdir, writeFile } from "fs/promises";
 import { join } from "path";
 import BaseSlashCommand from "./BaseSlashCommand";
 import Logger from "../Util/Logger";
 import { AsciiTable } from "../Util/AsciiTable";
 import BaseEvent from "./BaseEvent";
+import loadJSON from "../Util/LoadJSON";
+import { existsSync } from "fs";
+import { JSONDB } from "./Interfaces";
 
 export default class StaffListerClient extends Client {
 	public commands: Collection<string, BaseSlashCommand> = new Collection();
 	public logger = new Logger();
+	// @ts-ignore
+	public owners: string[] = process.env.OWNERS?.split(",");
+	public data: JSONDB = {
+		roles: [],
+		channel: "",
+		messageID: "",
+	};;
 
 	constructor() {
 		super({
@@ -27,6 +37,17 @@ export default class StaffListerClient extends Client {
 		commandsDir: join(__dirname, "../Commands/"),
 		eventsDir: join(__dirname, "../Events/"),
 	}) {
+		if(!existsSync("../../config.json")) {
+			await writeFile("../../config.json", JSON.stringify({
+				roles: [],
+				channel: "",
+				messageID: "",
+			}));
+		}
+		else {
+			this.data = await loadJSON(join(__dirname, "../../config.json"));
+		}
+
 		await this.__loadCommands(options.commandsDir);
 		await this.__loadEvents(options.eventsDir);
 
@@ -72,4 +93,15 @@ export default class StaffListerClient extends Client {
 
 		this.logger.success("client/events", "\n" + table.toString());
 	}
+
+	public configured() {
+		let count = 0;
+
+		if(this.data.roles.length === 0) count++;
+		if(this.data.channel === "") count++;
+		if(this.data.messageID === "") count++;
+
+		return count;
+	};
+
 };
