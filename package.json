@@ -1,9 +1,10 @@
 {
 	"name": "staff-list-discordbot",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"description": "?",
 	"scripts": {
-		"dev": "npx ts-node-dev ./Source/Bot.ts"
+		"dev": "npx nodemon ./Source/Bot.js",
+		"start": "node ./Source/Bot.js"
 	},
 	"repository": {
 		"type": "git",
@@ -16,12 +17,8 @@
 	},
 	"homepage": "https://github.com/SpiderMath/Staff-List-DiscordBot#readme",
 	"devDependencies": {
-		"@types/common-tags": "^1.8.1",
-		"@types/node": "^16.4.13",
-		"@typescript-eslint/parser": "^4.29.1",
 		"eslint": "^7.32.0",
-		"ts-node-dev": "^1.1.8",
-		"typescript": "^4.3.5"
+		"nodemon": "^2.0.12"
 	},
 	"dependencies": {
 		"common-tags": "^1.8.0",
