@@ -1,5 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 const { writeFileSync } = require("fs");
+const { join } = require("path");
 const updateStaffList = require("../Util/UpdateStaffList");
 
 /**
@@ -37,7 +38,7 @@ module.exports.run = async function(interaction, client) {
 		alias: roleAlias || "",
 	});
 
-	writeFileSync("../../config.json", JSON.stringify(client.data, null, "\t"));
+	writeFileSync(join(__dirname, "../../config.json"), JSON.stringify(client.data, null, "\t"));
 
 	await updateStaffList(client);
 
