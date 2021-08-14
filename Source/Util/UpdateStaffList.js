@@ -35,5 +35,4 @@ module.exports = async function updateStaffList(client) {
 	client.message.edit({
 		embeds: embedList,
 	});
-
 };

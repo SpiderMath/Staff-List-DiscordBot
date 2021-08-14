@@ -33,11 +33,12 @@ client.owners = process.env.OWNERS.split(",");
 
 // Loading the daaaaaaataaaaaaaaaaaaaaaaaaaaaaaaaa
 if(existsSync(join(__dirname, "../config.json"))) {
-	console.log("It exists for some reason");
+	client.logger.info("client/database", "The local data for the Roles List is available and loaded");
+
 	client.data = require("../config.json");
 }
 else {
-	console.log("It doesn't exist for some reason");
+	client.logger.info("client/database", "The local data for the Roles List is not available and is being written");
 	client.data = {
 		channel: "",
 		staff: [],
