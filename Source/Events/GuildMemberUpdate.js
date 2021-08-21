@@ -14,7 +14,7 @@ module.exports.run = async function(client, oldMember, newMember) {
 	// I only care if a role is added or removed, that too it has to be a Staff Role
 	const diff = newMember.roles.cache.difference(oldMember.roles.cache);
 
-	if(diff.size === 0) return console.log("Role not changed");
+	if(diff.size === 0) return;
 
 	const changedRoleID = diff.firstKey();
 

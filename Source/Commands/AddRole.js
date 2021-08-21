@@ -48,7 +48,7 @@ module.exports.run = async function(interaction, client) {
 				.setTimestamp()
 				.setColor("GREEN")
 				.setTitle("Added Role")
-				.setDescription(`The role <@&${role.id}> ${roleAlias.length > 0 ? `with alias ${roleAlias}` : "without role alias"} has been added to the database.`),
+				.setDescription(`The role <@&${role.id}> ${roleAlias ? `with alias ${roleAlias}` : "without role alias"} has been added to the database.`),
 		],
 	});
 };
