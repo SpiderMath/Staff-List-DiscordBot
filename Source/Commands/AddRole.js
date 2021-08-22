@@ -29,7 +29,7 @@ module.exports.config = {
  * @param {import("discord.js").CommandInteraction} interaction
  * @param {import("discord.js").Client} client The discord client.
  */
-module.exports.run = async function(interaction, client) {
+module.exports.run = async (interaction, client) => {
 	const role = interaction.options.getRole("role", true);
 	const roleAlias = interaction.options.getString("role-alias", false);
 

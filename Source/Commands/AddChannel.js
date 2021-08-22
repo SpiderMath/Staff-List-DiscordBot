@@ -7,16 +7,14 @@ const { MessageEmbed } = require("discord.js");
  * @type {import("discord.js").ApplicationCommandData}
  */
 module.exports.config = {
-	name: "removerole",
-	description: "Removes a role from a user",
-	options: [
-		{
-			name: "role",
-			description: "The role to remove",
-			type: "ROLE",
-			required: true,
-		},
-	],
+	name: "updatechannel",
+	description: "Add the channel to which the bot will be pushing notifications",
+	options: [{
+		name: "channel",
+		description: "The channel you want to add",
+		type: "CHANNEL",
+		required: true,
+	}],
 };
 
 /**
@@ -24,9 +22,11 @@ module.exports.config = {
  * @param {import("discord.js").Client} client The discord client.
  */
 module.exports.run = async (interaction, client) => {
-	const role = interaction.options.getRole("role", true);
+	const channel = interaction.options.getChannel("channel", true);
 
-	client.data.staff = client.data.staff.filter(r => r.role !== role.id);
+	if(channel.type !== "GUILD_TEXT") return interaction.editReply(":x: You can only have updates in Text channels!");
+
+	client.data.channel = channel.id;
 
 	writeFileSync(join(__dirname, "../../config.json"), JSON.stringify(client.data, null, "\t"));
 
@@ -35,10 +35,10 @@ module.exports.run = async (interaction, client) => {
 	interaction.editReply({
 		embeds: [
 			new MessageEmbed()
-				.setTimestamp()
 				.setColor("GREEN")
-				.setTitle("Removed role")
-				.setDescription(`Removed role <@&${role.id}> from the database list`),
+				.setTitle("Added Channel")
+				.setTimestamp()
+				.setDescription(`Successfully set <#${channel.id}> as the channel for further updates`),
 		],
 	});
 };
