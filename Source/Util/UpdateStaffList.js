@@ -6,6 +6,9 @@ const { MessageEmbed } = require("discord.js");
  */
 module.exports = async function updateStaffList(client) {
 	if(!client.data.channel) return;
+	/**
+	 * @type {import("discord.js").TextChannel}
+	 */
 	const channel = client.channels.cache.get(client.data.channel);
 
 	const embedList = new Array();
@@ -29,8 +32,19 @@ module.exports = async function updateStaffList(client) {
 
 	embedList.push(baseEmbed);
 
-	// Send the embed
-	if(!client.message) client.message = await channel.send({ embeds: embedList });
+	if(!client.message) {
+		// Purging previous bot messages
+		const messages = await channel.messages.fetch({
+			limit: 50,
+		});
+
+		const clientMessages = messages.filter(msg => msg.author.id === client.user.id);
+
+		await channel.bulkDelete(clientMessages);
+
+		// Sending embed
+		client.message = await channel.send({ embeds: embedList });
+	}
 
 	client.message.edit({
 		embeds: embedList,
