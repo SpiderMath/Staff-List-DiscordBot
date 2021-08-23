@@ -42,5 +42,5 @@ module.exports.run = async (interaction, client) => {
 
 	client.message = null;
 
-	updateStaffList(client);
+	await updateStaffList(client);
 };
