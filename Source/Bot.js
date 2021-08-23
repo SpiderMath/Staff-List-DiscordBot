@@ -4,6 +4,7 @@ const { readdirSync, existsSync, writeFileSync } = require("fs");
 const { join } = require("path");
 const AsciiTable = require("ascii-table");
 const { green, red, yellow, blue, cyan } = require("ansi-colors");
+const keepAlive = require("./Util/Server");
 
 console.log(cyan("OwO, starting up the Staff Lister Bot"));
 
@@ -79,5 +80,7 @@ for(const file of eventFiles) {
 }
 
 client.logger.success("client/events", "\n" + eventTable.toString());
+
+keepAlive(client);
 
 client.login(process.env.DISCORD_TOKEN);
