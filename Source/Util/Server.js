@@ -4,7 +4,7 @@ const application = express();
 
 function keepAlive(client) {
 	application.all("/", (req, res) => {
-		res.send("The bot is hosted and running".bold);
+		res.send("The bot is hosted and running".bold());
 	});
 
 	const port = process.env.PORT || 3000;
