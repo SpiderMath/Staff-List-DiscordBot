@@ -30,9 +30,7 @@ module.exports.run = async (interaction, client) => {
 
 	writeFileSync(join(__dirname, "../../config.json"), JSON.stringify(client.data, null, "\t"));
 
-	await updateStaffList(client);
-
-	interaction.editReply({
+	await interaction.editReply({
 		embeds: [
 			new MessageEmbed()
 				.setColor("GREEN")
@@ -41,4 +39,8 @@ module.exports.run = async (interaction, client) => {
 				.setDescription(`Successfully set <#${channel.id}> as the channel for further updates`),
 		],
 	});
+
+	client.message = null;
+
+	updateStaffList(client);
 };
