@@ -18,7 +18,7 @@
 	"homepage": "https://github.com/SpiderMath/Staff-List-DiscordBot#readme",
 	"devDependencies": {
 		"eslint": "^7.32.0",
-		"nodemon": "^2.0.12"
+		"nodemon": "^2.0.20"
 	},
 	"dependencies": {
 		"ansi-colors": "^4.1.1",
